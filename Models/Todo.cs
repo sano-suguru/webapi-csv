@@ -1,10 +1,13 @@
-﻿//using CsvHelper.Configuration.Attributes;
+﻿using CsvHelper.Configuration.Attributes;
 
 namespace WebApiCsv.Models {
   public class Todo {
-    //[Name("あいでー")]
     public int ID { get; set; }
+
+    [Name("タイトル")]
     public string Title { get; set; }
+
+    [Name("済")]
     public bool IsDone { get; set; }
   }
 }

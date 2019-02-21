@@ -6,15 +6,15 @@ namespace WebApiCsv.Controllers {
   [Route("api/[controller]")]
   [ApiController]
   public class TodosController : ControllerBase {
-    // サンプルなので DI はしないで直接 インスタンスを持っちゃう
     private readonly TodoService service = new TodoService();
 
-    // GET api/values
-    [HttpGet]
+    [HttpGet(nameof(TodosController.Export))]
     public FileContentResult Export() {
-      var csv = service.GetCsv();
-      var fileName = $"ToDoList-{DateTime.Now:yyyyMMdd_HHmmss}.csv";
-      return File(csv, "text/csv", fileName);
+      byte[] csvContents = service.GetCsvContents();
+      string contentType = "text/csv";
+      string fileName = $"ToDoList-{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+
+      return File(csvContents, contentType, fileName);
     }
   }
 }
